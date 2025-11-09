@@ -7,7 +7,6 @@ height="320"
 </p>
 <p align="center">
     <a align="center" href="null">Sakaki-Osint</a>
-<p>osint bot on whatsapp</>
 
 </p>
 <!-- <p align="center">
@@ -15,5 +14,7 @@ height="320"
 </p> -->
 <p align="center">
     <h1 align="center">Project Sakaki</h1>
+    <p>osint bot on whatsapp</>
+
 
 </p>

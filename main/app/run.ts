@@ -1,8 +1,8 @@
-import makeWASocket from '@whiskeysockets/baileys';
-import { Boom } from '@hapi/boom'
-import NodeCache from '@cacheable/node-cache'
-import readline from 'readline'
-import { 
+const makeWASocket = require ('@whiskeysockets/baileys');
+const { Boom } = require  ('@hapi/boom');
+const NodeCache = require ('@cacheable/node-cache');
+const readline = require  ('readline');
+const { 
 AnyMessageContent, 
 BinaryInfo, 
 CacheStore,
@@ -17,12 +17,11 @@ normalizeMessageContent,
 PatchedMessageWithRecipientJID, 
 proto, useMultiFileAuthState,
  WAMessageContent,
- WAMessageKey } from '@whiskeysockets/baileys'
+ WAMessageKey } = require ('@whiskeysockets/baileys');
 
-import open from 'open'
-import fs from 'fs'
-import P from 'pino'
-import { WAMHandler } from './wam'
+const open = require ('open');
+const fs = require ('fs');
+const P = require ('pino');
 
 const logger = P({
   level: "trace",
@@ -48,7 +47,7 @@ const usePairingCode = process.argv.includes('--use-pairing-code')
 
 // external map to store retry counts of messages when decryption/encryption fails
 // keep this out of the socket itself, so as to prevent a message decryption/encryption loop across socket restarts
-const msgRetryCounterCache = new NodeCache() as CacheStore
+const msgRetryCounterCache = new NodeCache() typeof CacheStore
 
 const onDemandMap = new Map<string, string>()
 
@@ -81,7 +80,6 @@ const startSock = async() => {
 	})
 
 
-	const wam = new WAMHandler(sock, state)
 
 	// Pairing code for Web clients
 	if (usePairingCode && !sock.authState.creds.registered) {
@@ -91,7 +89,7 @@ const startSock = async() => {
 		console.log(`Pairing code: ${code}`)
 	}
 
-	const sendMessageWTyping = async(msg: AnyMessageContent, jid: string) => {
+	const sendMessageWTyping = async(msg: AnyMessageContent: any, jid: string) => {
 		await sock.presenceSubscribe(jid)
 		await delay(500)
 
@@ -107,7 +105,7 @@ const startSock = async() => {
 	// efficiently in a batch
 	sock.ev.process(
 		// events is a map for event name => event data
-		async(events) => {
+		async(events: any) => {
 			// something about the connection changed
 			// maybe it closed, or we received all offline message or connection opened
 			if(events['connection.update']) {
